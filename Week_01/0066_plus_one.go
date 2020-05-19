@@ -2,19 +2,17 @@ package solutions
 
 func plusOne(digits []int) []int {
 
-	digits[len(digits)-1]++
-	requiredToEscalate := digits[len(digits)-1] >= 10
-	digits[len(digits)-1] = digits[len(digits)-1] % 10
+	requireToCarry := digits[len(digits)-1] == 9
+	digits[len(digits)-1] = (digits[len(digits)-1] + 1) % 10
 	for i := len(digits) - 2; i >= 0; i-- {
-		if requiredToEscalate {
-			requiredToEscalate = digits[i]+1 == 10
+		if requireToCarry {
+			requireToCarry = digits[i] == 9
 			digits[i] = (digits[i] + 1) % 10
 		}
 	}
 
-	if requiredToEscalate {
-		result := []int{}
-		result = append(result, 1)
+	if requireToCarry {
+		result := []int{1}
 		result = append(result, digits...)
 		return result
 	}

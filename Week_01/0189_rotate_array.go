@@ -28,17 +28,17 @@ package solutions
 func rotate(nums []int, k int) {
 	length := len(nums)
 	k = k % length
-	requiredToSwapCount := 0
-	for startIndex := 0; requiredToSwapCount < length; startIndex++ {
+	requireToSwapCount := 0
+	for startIndex := 0; requireToSwapCount < length; startIndex++ {
 		currentIndex := startIndex
-		previousElement := nums[startIndex]
+		previousElement := nums[currentIndex]
 		for {
 			nextIndex := (currentIndex + k) % length
 			extraElement := nums[nextIndex]
 			nums[nextIndex] = previousElement
 			previousElement = extraElement
 			currentIndex = nextIndex
-			requiredToSwapCount++
+			requireToSwapCount++
 			if currentIndex == startIndex {
 				break
 			}
