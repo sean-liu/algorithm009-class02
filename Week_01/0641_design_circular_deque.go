@@ -139,8 +139,8 @@ func (d *MyCircularDeque) InsertFront(value int) bool {
 	newNode.next = d.head.next
 	newNode.prev = d.head
 
-	d.head.next.prev = newNode
-	d.head.next = newNode
+	newNode.next.prev = newNode
+	newNode.prev.next = newNode
 	d.size++
 	return true
 }
@@ -156,8 +156,8 @@ func (d *MyCircularDeque) InsertLast(value int) bool {
 	newNode.next = d.tail
 	newNode.prev = d.tail.prev
 
-	d.tail.prev.next = newNode
-	d.tail.prev = newNode
+	newNode.prev.next = newNode
+	newNode.next.prev = newNode
 	d.size++
 	return true
 }
@@ -173,8 +173,7 @@ func (d *MyCircularDeque) DeleteFront() bool {
 	d.head.next = firstNode.next
 	firstNode.next.prev = d.head
 
-	firstNode.next = nil
-	firstNode.prev = nil
+	firstNode.next, firstNode.prev = nil, nil
 	d.size--
 
 	return true
@@ -191,8 +190,7 @@ func (d *MyCircularDeque) DeleteLast() bool {
 	d.tail.prev = lastNode.prev
 	lastNode.prev.next = d.tail
 
-	lastNode.next = nil
-	lastNode.prev = nil
+	lastNode.next, lastNode.prev = nil, nil
 	d.size--
 
 	return true
@@ -200,17 +198,11 @@ func (d *MyCircularDeque) DeleteLast() bool {
 
 // GetFront Get the front item from the deque.
 func (d *MyCircularDeque) GetFront() int {
-	if d.IsEmpty() {
-		return -1
-	}
 	return d.head.next.value
 }
 
 // GetRear  Get the last item from the deque.
 func (d *MyCircularDeque) GetRear() int {
-	if d.IsEmpty() {
-		return -1
-	}
 	return d.tail.prev.value
 }
 
